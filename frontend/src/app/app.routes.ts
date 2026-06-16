@@ -6,9 +6,9 @@ export const routes: Routes = [
         path: '',
         component: HomePage,
     },
-    /*{
+    {
         path: 'cars/list',
-        component:, 
-    },*/
+        component: HomePage, 
+    },
     //{path: '**', component: NotFound}, // Wildcard - always last
 ];

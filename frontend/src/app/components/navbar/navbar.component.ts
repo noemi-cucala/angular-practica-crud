@@ -1,14 +1,17 @@
 import { Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
   
-  testVar = signal("Hola"); 
+  testVar = signal("Hola");
+  
+  pages = signal([{url: '/', name: 'Inicio'},{url: 'cars/list', name: "Coches"}])
 
   redirect(url: string) {
     this.testVar.set(url);
