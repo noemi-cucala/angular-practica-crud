@@ -1,0 +1,33 @@
+<table class="grid w-full text-center border-collapse">
+    <!--<caption class="caption-bottom text-right text-gray-500 text-sm">
+        Total de coches: {{cars?.meta?.totalItems}}
+    </caption>-->
+    <thead class="col-span-4 grid grid-cols-subgrid">
+        <tr class="col-span-4 grid grid-cols-subgrid">
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Imagen</th>
+          <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody class="col-span-4 grid grid-cols-subgrid">
+        @for (car of cars?.items; track $index) {
+            <tr class="col-span-4 grid grid-cols-subgrid border rounded border-sky-900/10 my-2">
+              <td class="px-2 py-6">{{car.brand.name}}</td>
+              <td class="px-2 py-6">{{car.model.name}}</td>
+              <td class="px-2 py-6">
+                  <!--<img [src]="car.imageUrl" [alt]="['Coche ' + car.brand.name + ' ' + car.model.name]">-->
+                  {{car.imageUrl}}
+              </td>
+              <td class="px-2 py-6">
+                <button class="cursor-pointer hover:bg-sky-900/5" (click)="viewCarDetails(car.id)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                </button>
+              </td>
+            </tr>
+        }
+    </tbody>
+</table>
