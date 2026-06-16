@@ -1,0 +1,12 @@
+<div>
+    <h1 class="text-xl mb-5">Revisa las últimas incorporaciones</h1>
+    <div class="flex space-x-5">
+        @for (card of cards(); track $index) {
+            <div class="border border-sky-800 rounded-xl p-2 size-40 flex flex-col justify-center">
+                <p class="m-auto">
+                    {{card}}
+                </p>
+            </div>
+        }
+    </div>
+</div>
