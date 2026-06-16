@@ -9,6 +9,10 @@ export const routes: Routes = [
     {
         path: 'cars/list',
         component: HomePage, 
+    },    
+    {
+        path: 'logout',
+        component: HomePage, 
     },
     //{path: '**', component: NotFound}, // Wildcard - always last
 ];
