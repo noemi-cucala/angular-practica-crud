@@ -11,7 +11,7 @@ export class NavbarComponent {
   
   testVar = signal("Hola");
   
-  pages = signal([{url: '/', name: 'Inicio'}, {url: 'cars/list', name: "Coches"}, {url: 'logout', name: "Cerrar Sesión"}])
+  pages = signal([{url: '/', name: 'Inicio'}, {url: 'cars', name: "Coches"}, {url: 'logout', name: "Cerrar Sesión"}])
 
   redirect(url: string) {
     this.testVar.set(url);
