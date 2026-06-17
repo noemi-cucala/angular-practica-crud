@@ -10,7 +10,8 @@ export class CarsService {
 
   private readonly API_URL = 'http://localhost:4200/api'
 
-  private http = inject(HttpClient);
+  //private http = inject(HttpClient);
+  constructor(private http: HttpClient){}
 
   getCars(): Observable<Cars> {
     return this.http.get<Cars>(this.API_URL + '/cars');

@@ -1,33 +1,79 @@
-<table class="grid w-full text-center border-collapse">
-    <!--<caption class="caption-bottom text-right text-gray-500 text-sm">
-        Total de coches: {{cars?.meta?.totalItems}}
-    </caption>-->
-    <thead class="col-span-4 grid grid-cols-subgrid">
-        <tr class="col-span-4 grid grid-cols-subgrid">
-          <th>Marca</th>
-          <th>Modelo</th>
-          <th>Imagen</th>
-          <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody class="col-span-4 grid grid-cols-subgrid">
-        @for (car of cars?.items; track $index) {
-            <tr class="col-span-4 grid grid-cols-subgrid border rounded border-sky-900/10 my-2">
-              <td class="px-2 py-6">{{car.brand.name}}</td>
-              <td class="px-2 py-6">{{car.model.name}}</td>
-              <td class="px-2 py-6">
-                  <!--<img [src]="car.imageUrl" [alt]="['Coche ' + car.brand.name + ' ' + car.model.name]">-->
-                  {{car.imageUrl}}
-              </td>
-              <td class="px-2 py-6">
-                <button class="cursor-pointer hover:bg-sky-900/5" (click)="viewCarDetails(car.id)">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-                </button>
-              </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<h1>
+    {{loading()}}
+</h1>
+
+ <!--TODO: Control loading data correctly-->
+@if (loading()) {
+    HOLA
+    <div class="flex justify-center items-center h-90">
+        <svg class="mr-3 size-8 animate-spin text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+    </div>
+}
+
+@else if (cars$ | async; as cars) {
+    @if (cars.meta.totalItems === 0) {
+        <div class="border border-gray-300 rounded-lg flex flex-col justify-center text-gray-500 m-auto p-15 w-1/2 ">
+            <span class="mb-5">Por el momento no hay coches. Prueba a añadir el primero:</span>
+            <button class="cursor-pointer hover:bg-sky-900/5 rounded-full w-1/10 mx-auto" (click)="addCar()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </button>
+        </div>
+    }
+    
+    @else {
+        <div>
+            <button class="flex cursor-pointer border border-sky-900/25 hover:bg-sky-900/5 rounded-sm px-2 py-1" (click)="addCar()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-sky-900/25 size-6 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                Añadir
+            </button>
+            <table class="grid w-full text-center text-sky-950 py-5">
+                <thead class="col-span-4 grid grid-cols-subgrid">
+                    <tr class="col-span-4 grid grid-cols-subgrid">
+                      <th>Marca</th>
+                      <th>Modelo</th>
+                      <th>Imagen</th>
+                      <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="col-span-4 grid grid-cols-subgrid">
+                    @for (car of cars.items; track car.id) {
+                        <tr class="col-span-4 grid grid-cols-subgrid border rounded border-sky-900/10 my-2">
+                          <td class="px-2 py-6">{{car.brand.name}}</td>
+                          <td class="px-2 py-6">{{car.model.name}}</td>
+                          <td class="px-2 py-6">
+                            <!--TODO: Load car image-->
+                              <!--<img [src]="car.imageUrl" [alt]="['Coche ' + car.brand.name + ' ' + car.model.name]">-->
+                              {{car.imageUrl}}
+                          </td>
+                          <td class="px-2 py-6 space-x-2">
+                            <button class="cursor-pointer rounded-full" (click)="viewCar(car.id)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-sky-950 hover:text-sky-900/50 size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                            </button>
+            
+                            <button class="cursor-pointer rounded-full" (click)="editCar(car.id)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-sky-950 hover:text-sky-900/50 size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                </svg>
+                            </button>
+                          </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-right text-gray-500 text-sm">
+                Total de coches: {{cars.meta.totalItems}}
+            </div>
+        </div>
+    }
+}
+
