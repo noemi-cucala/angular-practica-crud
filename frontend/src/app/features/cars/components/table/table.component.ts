@@ -26,7 +26,7 @@ export class TableComponent {
     )
   }
 
-  viewCarDetails(carId: string): void {
-    console.log("ID CAR! " + carId);
+  viewCar(carId: string): void {
+    this.router.navigate(['cars', carId]);
   }
 }
