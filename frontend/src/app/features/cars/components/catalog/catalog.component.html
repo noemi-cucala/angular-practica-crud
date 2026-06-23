@@ -1,0 +1,38 @@
+<form [formGroup]="brandsForm">
+  <div class="my-10 flex flex-wrap gap-x-6 gap-y-8 items-end">
+      
+      <div class="flex flex-col grow">
+        <label for="brand" class="block text-sm/6 font-medium text-gray-900">Marca</label>
+        <div class="mt-2 grid grid-cols-1">
+          <select id="brand" name="brand" formControlName="brandId" autocomplete="brand-name" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-600 sm:text-sm/6">
+            @for (brand of brands(); track brand.id) {
+              <option [value]="[brand.id]">{{brand.name}}</option>
+            }
+          </select>
+          <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4">
+            <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="flex flex-col grow">
+        <label for="model" class="block text-sm/6 font-medium text-gray-900">Modelo</label>
+        <div class="mt-2 grid grid-cols-1">
+          <select id="model" name="model" formControlName="modelId" autocomplete="model-name" 
+            class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-600 disabled:border-gray-50 disabled:bg-gray-50 disabled:text-gray-500 sm:text-sm/6">
+            @for (model of models$ | async; track model.id) {
+              <option [value]="[model.id]">{{model.name}}</option>
+            }
+          </select>
+          <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4">
+            <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="flex flex-col">
+        <button type="button" class="cursor-pointer border border-gray-300 rounded-lg hover:bg-sky-900/5 px-4 py-2" (click)="resetForm()">Vaciar</button>
+      </div>      
+
+    </div>
+</form>
