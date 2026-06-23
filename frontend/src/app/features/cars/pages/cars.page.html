@@ -1,1 +1,2 @@
-<app-table />
+<app-catalog  (notify)="onFiltersChanged($event)" />
+<app-table [cars]="cars$ | async" />
