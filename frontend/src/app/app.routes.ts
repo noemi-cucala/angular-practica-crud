@@ -38,6 +38,6 @@ export const routes: Routes = [
     {
         path: 'logout',
         component: HomePage, 
-    },
+    }
     //{path: '**', component: NotFound}, // Wildcard - always last
 ];
