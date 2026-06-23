@@ -1,8 +1,8 @@
-<h1>
+<!--<h1>
     {{loading()}}
 </h1>
 
- <!--TODO: Control loading data correctly-->
+ <!--TODO: Control loading data correctly
 @if (loading()) {
     HOLA
     <div class="flex justify-center items-center h-90">
@@ -13,8 +13,8 @@
     </div>
 }
 
-@else if (cars$ | async; as cars) {
-    @if (cars.meta.totalItems === 0) {
+@else if (cars$ | async; as cars) {-->
+    @if (cars?.meta?.totalItems === 0) {
         <div class="border border-gray-300 rounded-lg flex flex-col justify-center text-gray-500 m-auto p-15 w-1/2 ">
             <span class="mb-5">Por el momento no hay coches. Prueba a añadir el primero:</span>
             <button class="cursor-pointer hover:bg-sky-900/5 rounded-full w-1/10 mx-auto" (click)="addCar()">
@@ -43,7 +43,7 @@
                     </tr>
                 </thead>
                 <tbody class="col-span-4 grid grid-cols-subgrid">
-                    @for (car of cars.items; track car.id) {
+                    @for (car of cars?.items; track car.id) {
                         <tr class="col-span-4 grid grid-cols-subgrid border rounded border-sky-900/10 my-2">
                           <td class="px-2 py-6">{{car.brand.name}}</td>
                           <td class="px-2 py-6">{{car.model.name}}</td>
@@ -71,9 +71,7 @@
                 </tbody>
             </table>
             <div class="text-right text-gray-500 text-sm">
-                Total de coches: {{cars.meta.totalItems}}
+                Total de coches: {{cars?.meta?.totalItems}}
             </div>
         </div>
     }
-}
-
